@@ -1,26 +1,23 @@
 package com.example.xmltojson.models;
 
-import java.util.ArrayList;
-import java.util.jar.Attributes;
-
 public class Combination {
     String StockQuantity;
     String Gtin;
     String Sku;
     String Id;
     String Barcode;
-    ArrayList<Attribute> Attributes;
+    Attribute attribute;
 
     public Combination() {
     }
 
-    public Combination(String stockQuantity, String gtin, String sku, String id, String barcode, ArrayList<Attribute> attributes) {
+    public Combination(String stockQuantity, String gtin, String sku, String id, String barcode, Attribute attribute) {
         StockQuantity = stockQuantity;
         Gtin = gtin;
         Sku = sku;
         Id = id;
         Barcode = barcode;
-        Attributes = attributes;
+        this.attribute = attribute;
     }
 
     public String getStockQuantity() {
@@ -63,11 +60,11 @@ public class Combination {
         Barcode = barcode;
     }
 
-    public ArrayList<Attribute> getAttributes() {
-        return Attributes;
+    public Attribute getAttribute() {
+        return attribute;
     }
 
-    public void setAttributes(ArrayList<Attribute> attributes) {
-        Attributes = attributes;
+    public void setAttribute(Attribute attribute) {
+        this.attribute = attribute;
     }
 }

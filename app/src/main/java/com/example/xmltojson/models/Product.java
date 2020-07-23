@@ -1,8 +1,6 @@
 package com.example.xmltojson.models;
 
 import java.util.ArrayList;
-import java.util.List;
-import java.util.Locale;
 
 public class Product {
     public String MainCategory;
@@ -21,8 +19,8 @@ public class Product {
     public String Sku;
     public String ModelCode;
     public String Id;
-    public Categories Categories;
-    ArrayList<Manufacturer> Manufacturers;
+    public Category category;
+    Manufacturer manufacturer;
     ArrayList<Picture> Pictures;
     ArrayList<Combination> Combinations;
     ArrayList<Specification> Specifications;
@@ -32,7 +30,7 @@ public class Product {
     public Product() {
     }
 
-    public Product(String content, String mainCategory, String VAT, String tax, String weight, String price, String oldPrice, String stockQuantity, String currency, String fullDescription, String shortDescription, String name, String gtin, String color, String sku, String modelCode, String id, Categories categories, ArrayList<Manufacturer> manufacturers, ArrayList<Picture> pictures, ArrayList<Combination> combinations, ArrayList<Specification> specifications, String editorNote, String description) {
+    public Product(String content, String mainCategory, String VAT, String tax, String weight, String price, String oldPrice, String stockQuantity, String currency, String fullDescription, String shortDescription, String name, String gtin, String color, String sku, String modelCode, String id, Category categories, Manufacturer manufacturers, ArrayList<Picture> pictures, ArrayList<Combination> combinations, ArrayList<Specification> specifications, String editorNote, String description) {
         MainCategory = mainCategory;
         this.VAT = VAT;
         Tax = tax;
@@ -49,8 +47,8 @@ public class Product {
         Sku = sku;
         ModelCode = modelCode;
         Id = id;
-        Categories = categories;
-        Manufacturers = manufacturers;
+        category = categories;
+        manufacturer = manufacturers;
         Pictures = pictures;
         Combinations = combinations;
         Specifications = specifications;
@@ -188,20 +186,20 @@ public class Product {
         Id = id;
     }
 
-    public Categories getCategories() {
-        return Categories;
+    public Category getCategory() {
+        return category;
     }
 
-    public void setCategories(Categories categories) {
-        Categories = categories;
+    public void setCategory(Category category) {
+        this.category = category;
     }
 
-    public ArrayList<Manufacturer> getManufacturers() {
-        return Manufacturers;
+    public Manufacturer getManufacturer() {
+        return manufacturer;
     }
 
-    public void setManufacturers(ArrayList<Manufacturer> manufacturers) {
-        Manufacturers = manufacturers;
+    public void setManufacturer(Manufacturer manufacturer) {
+        this.manufacturer = manufacturer;
     }
 
     public ArrayList<Picture> getPictures() {

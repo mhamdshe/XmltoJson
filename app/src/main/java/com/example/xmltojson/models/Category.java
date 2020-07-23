@@ -9,8 +9,7 @@ public class Category {
         Path = path;
     }
 
-    public Category(String displayOrder) {
-        DisplayOrder = displayOrder;
+    public Category() {
     }
 
     public String getDisplayOrder() {

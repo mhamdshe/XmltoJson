@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?><Products>
+    <Product Id="104767" ModelCode="251-1277" Sku="251-1277" Color="Kahve" Gtin="" Name="Patlı Gömlek" ShortDescription="" FullDescription="Kahve Patlı Gömlek" Currency="TRY" StockQuantity="17" OldPrice="49,99" Price="49,99" Weight="0,21" Tax="" VAT="8" MainCategory="Üst Giyim">
+        <Categories>
+            <Category Path="Üst Giyim" DisplayOrder="0" />
+        </Categories>
+        <Manufacturers>
+            <Manufacturer Name="EKRUMODA" DisplayOrder="0" />
+        </Manufacturers>
+        <Pictures>
+            <Picture Path="https://ekrumoda.com/images/urunler/patli-gomlek-104764_15947069000-1000.jpg" />
+            <Picture Path="https://ekrumoda.com/images/urunler/patli-gomlek-104764_15947069001-1000.jpg" />
+            <Picture Path="https://ekrumoda.com/images/urunler/patli-gomlek-104764_15947069002-1000.jpg" />
+            <Picture Path="https://ekrumoda.com/images/urunler/patli-gomlek-104764_15947069013-1000.jpg" />
+            <Picture Path="https://ekrumoda.com/images/urunler/patli-gomlek-104764_15947069014-1000.jpg" />
+            <Picture Path="https://ekrumoda.com/images/urunler/patli-gomlek-104764_15947069015-1000.jpg" />
+        </Pictures>
+        <Combinations>
+            <Combination Id="346632" Sku="346632" Gtin="346632" Barcode="69093084" StockQuantity="3">
+                <Attributes>
+                    <Attribute Name="Beden" Value="36" />
+                </Attributes>
+            </Combination>
+            <Combination Id="346633" Sku="346633" Gtin="346633" Barcode="29706569" StockQuantity="4">
+            <Attributes>
+                <Attribute Name="Beden" Value="38" />
+            </Attributes>
+        </Combination>
+            <Combination Id="346634" Sku="346634" Gtin="346634" Barcode="32988261" StockQuantity="0">
+            <Attributes>
+                <Attribute Name="Beden" Value="40" />
+            </Attributes>
+        </Combination>
+            <Combination Id="346635" Sku="346635" Gtin="346635" Barcode="55955444" StockQuantity="5">
+            <Attributes>
+                <Attribute Name="Beden" Value="42" />
+            </Attributes>
+        </Combination>
+            <Combination Id="346636" Sku="346636" Gtin="346636" Barcode="94197715" StockQuantity="5">
+            <Attributes>
+                <Attribute Name="Beden" Value="44" />
+            </Attributes>
+        </Combination>
+        </Combinations>
+        <Specifications>
+            <Specification Name="Beden" Value="36" DisplayOrder="0" />
+            <Specification Name="Beden" Value="38" DisplayOrder="0" />
+            <Specification Name="Beden" Value="40" DisplayOrder="0" />
+            <Specification Name="Beden" Value="42" DisplayOrder="0" />
+            <Specification Name="Beden" Value="44" DisplayOrder="0" />
+        </Specifications>
+        <EditorNote>
+            <![CDATA[Kumaş İçeriği:&amp;nbsp; %45&amp;nbsp;Pamuk %45&amp;nbsp;Polyester %10&amp;nbsp;Likra&amp;nbsp;&amp;nbsp;&amp;nbsp;Sezon:&amp;nbsp;Dört Mevsim&amp;nbsp;&amp;nbsp;Sektör:&amp;nbsp;Tekstil&amp;nbsp;&amp;nbsp;Malzeme Türü:&amp;nbsp;Penye&amp;nbsp;&amp;nbsp;Boy Aralığı:&amp;nbsp;110-120&amp;nbsp;&amp;nbsp;Kalıp:&amp;nbsp;Standart Kalıp&amp;nbsp;&amp;nbsp;Kol:&amp;nbsp;T Kol]]>
+        </EditorNote>
+        <Description>
+            <![CDATA[Kumaş İçeriği:&amp;nbsp; %60&amp;nbsp;Pamuk %40&amp;nbsp;Polyester&amp;nbsp;&amp;nbsp;&amp;nbsp;Sezon:&amp;nbsp;Dört Mevsim&amp;nbsp;&amp;nbsp;Sektör:&amp;nbsp;Tekstil&amp;nbsp;&amp;nbsp;Boy Aralığı:&amp;nbsp;80-90&amp;nbsp;&amp;nbsp;Kalıp:&amp;nbsp;Rahat Kalıp&amp;nbsp;&amp;nbsp;Yaka:&amp;nbsp;Sivri Yaka&amp;nbsp;&amp;nbsp;Kol:&amp;nbsp;Takma&amp;nbsp;&amp;nbsp;Model Detay:&amp;nbsp;Düğmeli, Cepli&amp;nbsp;&amp;nbsp;Kullanım Alanı:&amp;nbsp;Günlük]]>
+        </Description>
+    </Product>
+    <Product Id="10000000" ModelCode="251-1277" Sku="251-1277" Color="Kahve" Gtin="" Name="Patlı Gömlek" ShortDescription="" FullDescription="Kahve Patlı Gömlek" Currency="TRY" StockQuantity="17" OldPrice="49,99" Price="49,99" Weight="0,21" Tax="" VAT="8" MainCategory="Üst Giyim">
+        <Categories>
+            <Category Path="Üst Giyim" DisplayOrder="0" />
+        </Categories>
+        <Manufacturers>
+            <Manufacturer Name="EKRUMODA" DisplayOrder="0" />
+        </Manufacturers>
+        <Pictures>
+            <Picture Path="https://ekrumoda.com/images/urunler/patli-gomlek-104764_15947069000-1000.jpg" />
+            <Picture Path="https://ekrumoda.com/images/urunler/patli-gomlek-104764_15947069001-1000.jpg" />
+            <Picture Path="https://ekrumoda.com/images/urunler/patli-gomlek-104764_15947069002-1000.jpg" />
+            <Picture Path="https://ekrumoda.com/images/urunler/patli-gomlek-104764_15947069013-1000.jpg" />
+            <Picture Path="https://ekrumoda.com/images/urunler/patli-gomlek-104764_15947069014-1000.jpg" />
+            <Picture Path="https://ekrumoda.com/images/urunler/patli-gomlek-104764_15947069015-1000.jpg" />
+        </Pictures>
+        <Combinations>
+            <Combination Id="346632" Sku="346632" Gtin="346632" Barcode="69093084" StockQuantity="3">
+                <Attributes>
+                    <Attribute Name="Beden" Value="36" />
+                </Attributes>
+            </Combination>
+            <Combination Id="346633" Sku="346633" Gtin="346633" Barcode="29706569" StockQuantity="4">
+                <Attributes>
+                    <Attribute Name="Beden" Value="38" />
+                </Attributes>
+            </Combination>
+            <Combination Id="346634" Sku="346634" Gtin="346634" Barcode="32988261" StockQuantity="0">
+                <Attributes>
+                    <Attribute Name="Beden" Value="40" />
+                </Attributes>
+            </Combination>
+            <Combination Id="346635" Sku="346635" Gtin="346635" Barcode="55955444" StockQuantity="5">
+                <Attributes>
+                    <Attribute Name="Beden" Value="42" />
+                </Attributes>
+            </Combination>
+            <Combination Id="346636" Sku="346636" Gtin="346636" Barcode="94197715" StockQuantity="5">
+                <Attributes>
+                    <Attribute Name="Beden" Value="44" />
+                </Attributes>
+            </Combination>
+        </Combinations>
+        <Specifications>
+            <Specification Name="Beden" Value="36" DisplayOrder="0" />
+            <Specification Name="Beden" Value="38" DisplayOrder="0" />
+            <Specification Name="Beden" Value="40" DisplayOrder="0" />
+            <Specification Name="Beden" Value="42" DisplayOrder="0" />
+            <Specification Name="Beden" Value="44" DisplayOrder="0" />
+        </Specifications>
+        <EditorNote>
+            <![CDATA[Kumaş İçeriği:&amp;nbsp; %45&amp;nbsp;Pamuk %45&amp;nbsp;Polyester %10&amp;nbsp;Likra&amp;nbsp;&amp;nbsp;&amp;nbsp;Sezon:&amp;nbsp;Dört Mevsim&amp;nbsp;&amp;nbsp;Sektör:&amp;nbsp;Tekstil&amp;nbsp;&amp;nbsp;Malzeme Türü:&amp;nbsp;Penye&amp;nbsp;&amp;nbsp;Boy Aralığı:&amp;nbsp;110-120&amp;nbsp;&amp;nbsp;Kalıp:&amp;nbsp;Standart Kalıp&amp;nbsp;&amp;nbsp;Kol:&amp;nbsp;T Kol]]>
+        </EditorNote>
+        <Description>
+            <![CDATA[Kumaş İçeriği:&amp;nbsp; %60&amp;nbsp;Pamuk %40&amp;nbsp;Polyester&amp;nbsp;&amp;nbsp;&amp;nbsp;Sezon:&amp;nbsp;Dört Mevsim&amp;nbsp;&amp;nbsp;Sektör:&amp;nbsp;Tekstil&amp;nbsp;&amp;nbsp;Boy Aralığı:&amp;nbsp;80-90&amp;nbsp;&amp;nbsp;Kalıp:&amp;nbsp;Rahat Kalıp&amp;nbsp;&amp;nbsp;Yaka:&amp;nbsp;Sivri Yaka&amp;nbsp;&amp;nbsp;Kol:&amp;nbsp;Takma&amp;nbsp;&amp;nbsp;Model Detay:&amp;nbsp;Düğmeli, Cepli&amp;nbsp;&amp;nbsp;Kullanım Alanı:&amp;nbsp;Günlük]]>
+        </Description>
+    </Product>
+</Products>

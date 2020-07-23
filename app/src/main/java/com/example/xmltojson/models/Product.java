@@ -3,187 +3,186 @@ package com.example.xmltojson.models;
 import java.util.ArrayList;
 
 public class Product {
-    public String MainCategory;
-    public String VAT;
-    public String Tax;
-    public String Weight;
-    public String Price;
-    public String OldPrice;
-    public String StockQuantity;
-    public String Currency;
-    public String FullDescription;
-    public String ShortDescription;
-    public String Name;
-    public String Gtin;
-    public String Color;
-    public String Sku;
-    public String ModelCode;
-    public String Id;
+    public String mainCategory;
+    public String vat;
+    public String tax;
+    public String weight;
+    public String price;
+    public String oldPrice;
+    public String stockQuantity;
+    public String currency;
+    public String fullDescription;
+    public String shortDescription;
+    public String name;
+    public String gtin;
+    public String color;
+    public String sku;
+    public String modelCode;
+    public String id;
     public Category category;
     Manufacturer manufacturer;
-    ArrayList<Picture> Pictures;
-    ArrayList<Combination> Combinations;
-    ArrayList<Specification> Specifications;
-    public String EditorNote;
-    public String Description;
+    public String editorNote;
+    public String description;
+    ArrayList<Picture> pictures;
+    ArrayList<Combination> combinations;
+    ArrayList<Specification> specifications;
 
     public Product() {
     }
 
-    public Product(String content, String mainCategory, String VAT, String tax, String weight, String price, String oldPrice, String stockQuantity, String currency, String fullDescription, String shortDescription, String name, String gtin, String color, String sku, String modelCode, String id, Category categories, Manufacturer manufacturers, ArrayList<Picture> pictures, ArrayList<Combination> combinations, ArrayList<Specification> specifications, String editorNote, String description) {
-        MainCategory = mainCategory;
-        this.VAT = VAT;
-        Tax = tax;
-        Weight = weight;
-        Price = price;
-        OldPrice = oldPrice;
-        StockQuantity = stockQuantity;
-        Currency = currency;
-        FullDescription = fullDescription;
-        ShortDescription = shortDescription;
-        Name = name;
-        Gtin = gtin;
-        Color = color;
-        Sku = sku;
-        ModelCode = modelCode;
-        Id = id;
+    public Product(String content, String mainCategory, String vat, String tax, String weight, String price, String oldPrice, String stockQuantity, String currency, String fullDescription, String shortDescription, String name, String gtin, String color, String sku, String modelCode, String id, Category categories, Manufacturer manufacturers, ArrayList<Picture> pictures, ArrayList<Combination> combinations, ArrayList<Specification> specifications, String editorNote, String description) {
+        this.mainCategory = mainCategory;
+        this.vat = vat;
+        this.tax = tax;
+        this.weight = weight;
+        this.price = price;
+        this.oldPrice = oldPrice;
+        this.stockQuantity = stockQuantity;
+        this.currency = currency;
+        this.fullDescription = fullDescription;
+        this.shortDescription = shortDescription;
+        this.name = name;
+        this.gtin = gtin;
+        this.color = color;
+        this.sku = sku;
+        this.modelCode = modelCode;
+        this.id = id;
         category = categories;
         manufacturer = manufacturers;
-        Pictures = pictures;
-        Combinations = combinations;
-        Specifications = specifications;
-        EditorNote = editorNote;
-        Description = description;
+        this.pictures = pictures;
+        this.combinations = combinations;
+        this.specifications = specifications;
+        this.editorNote = editorNote;
+        this.description = description;
     }
-
 
 
     public String getMainCategory() {
-        return MainCategory;
+        return mainCategory;
     }
 
     public void setMainCategory(String mainCategory) {
-        MainCategory = mainCategory;
+        this.mainCategory = mainCategory;
     }
 
-    public String getVAT() {
-        return VAT;
+    public String getVat() {
+        return vat;
     }
 
-    public void setVAT(String VAT) {
-        this.VAT = VAT;
+    public void setVat(String vat) {
+        this.vat = vat;
     }
 
     public String getTax() {
-        return Tax;
+        return tax;
     }
 
     public void setTax(String tax) {
-        Tax = tax;
+        this.tax = tax;
     }
 
     public String getWeight() {
-        return Weight;
+        return weight;
     }
 
     public void setWeight(String weight) {
-        Weight = weight;
+        this.weight = weight;
     }
 
     public String getPrice() {
-        return Price;
+        return price;
     }
 
     public void setPrice(String price) {
-        Price = price;
+        this.price = price;
     }
 
     public String getOldPrice() {
-        return OldPrice;
+        return oldPrice;
     }
 
     public void setOldPrice(String oldPrice) {
-        OldPrice = oldPrice;
+        this.oldPrice = oldPrice;
     }
 
     public String getStockQuantity() {
-        return StockQuantity;
+        return stockQuantity;
     }
 
     public void setStockQuantity(String stockQuantity) {
-        StockQuantity = stockQuantity;
+        this.stockQuantity = stockQuantity;
     }
 
     public String getCurrency() {
-        return Currency;
+        return currency;
     }
 
     public void setCurrency(String currency) {
-        Currency = currency;
+        this.currency = currency;
     }
 
     public String getFullDescription() {
-        return FullDescription;
+        return fullDescription;
     }
 
     public void setFullDescription(String fullDescription) {
-        FullDescription = fullDescription;
+        this.fullDescription = fullDescription;
     }
 
     public String getShortDescription() {
-        return ShortDescription;
+        return shortDescription;
     }
 
     public void setShortDescription(String shortDescription) {
-        ShortDescription = shortDescription;
+        this.shortDescription = shortDescription;
     }
 
     public String getName() {
-        return Name;
+        return name;
     }
 
     public void setName(String name) {
-        Name = name;
+        this.name = name;
     }
 
     public String getGtin() {
-        return Gtin;
+        return gtin;
     }
 
     public void setGtin(String gtin) {
-        Gtin = gtin;
+        this.gtin = gtin;
     }
 
     public String getColor() {
-        return Color;
+        return color;
     }
 
     public void setColor(String color) {
-        Color = color;
+        this.color = color;
     }
 
     public String getSku() {
-        return Sku;
+        return sku;
     }
 
     public void setSku(String sku) {
-        Sku = sku;
+        this.sku = sku;
     }
 
     public String getModelCode() {
-        return ModelCode;
+        return modelCode;
     }
 
     public void setModelCode(String modelCode) {
-        ModelCode = modelCode;
+        this.modelCode = modelCode;
     }
 
     public String getId() {
-        return Id;
+        return id;
     }
 
     public void setId(String id) {
-        Id = id;
+        this.id = id;
     }
 
     public Category getCategory() {
@@ -203,42 +202,42 @@ public class Product {
     }
 
     public ArrayList<Picture> getPictures() {
-        return Pictures;
+        return pictures;
     }
 
     public void setPictures(ArrayList<Picture> pictures) {
-        Pictures = pictures;
+        this.pictures = pictures;
     }
 
     public ArrayList<Combination> getCombinations() {
-        return Combinations;
+        return combinations;
     }
 
     public void setCombinations(ArrayList<Combination> combinations) {
-        Combinations = combinations;
+        this.combinations = combinations;
     }
 
     public ArrayList<Specification> getSpecifications() {
-        return Specifications;
+        return specifications;
     }
 
     public void setSpecifications(ArrayList<Specification> specifications) {
-        Specifications = specifications;
+        this.specifications = specifications;
     }
 
     public String getEditorNote() {
-        return EditorNote;
+        return editorNote;
     }
 
     public void setEditorNote(String editorNote) {
-        EditorNote = editorNote;
+        this.editorNote = editorNote;
     }
 
     public String getDescription() {
-        return Description;
+        return description;
     }
 
     public void setDescription(String description) {
-        Description = description;
+        this.description = description;
     }
 }

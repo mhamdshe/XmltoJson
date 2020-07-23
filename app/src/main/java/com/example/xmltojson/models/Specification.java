@@ -1,40 +1,40 @@
 package com.example.xmltojson.models;
 
 public class Specification {
-    String Name;
-    String DisplayOrder;
-    String Value;
+    String name;
+    String displayOrder;
+    String value;
 
     public Specification() {
     }
 
     public Specification(String name, String displayOrder, String value) {
-        Name = name;
-        DisplayOrder = displayOrder;
-        Value = value;
+        this.name = name;
+        this.displayOrder = displayOrder;
+        this.value = value;
     }
 
     public String getName() {
-        return Name;
+        return name;
     }
 
     public void setName(String name) {
-        Name = name;
+        this.name = name;
     }
 
     public String getDisplayOrder() {
-        return DisplayOrder;
+        return displayOrder;
     }
 
     public void setDisplayOrder(String displayOrder) {
-        DisplayOrder = displayOrder;
+        this.displayOrder = displayOrder;
     }
 
     public String getValue() {
-        return Value;
+        return value;
     }
 
     public void setValue(String value) {
-        Value = value;
+        this.value = value;
     }
 }

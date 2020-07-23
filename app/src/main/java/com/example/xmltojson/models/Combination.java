@@ -1,63 +1,63 @@
 package com.example.xmltojson.models;
 
 public class Combination {
-    String StockQuantity;
-    String Gtin;
-    String Sku;
-    String Id;
-    String Barcode;
+    String stockQuantity;
+    String gtin;
+    String sku;
+    String id;
+    String barcode;
     Attribute attribute;
 
     public Combination() {
     }
 
     public Combination(String stockQuantity, String gtin, String sku, String id, String barcode, Attribute attribute) {
-        StockQuantity = stockQuantity;
-        Gtin = gtin;
-        Sku = sku;
-        Id = id;
-        Barcode = barcode;
+        this.stockQuantity = stockQuantity;
+        this.gtin = gtin;
+        this.sku = sku;
+        this.id = id;
+        this.barcode = barcode;
         this.attribute = attribute;
     }
 
     public String getStockQuantity() {
-        return StockQuantity;
+        return stockQuantity;
     }
 
     public void setStockQuantity(String stockQuantity) {
-        StockQuantity = stockQuantity;
+        this.stockQuantity = stockQuantity;
     }
 
     public String getGtin() {
-        return Gtin;
+        return gtin;
     }
 
     public void setGtin(String gtin) {
-        Gtin = gtin;
+        this.gtin = gtin;
     }
 
     public String getSku() {
-        return Sku;
+        return sku;
     }
 
     public void setSku(String sku) {
-        Sku = sku;
+        this.sku = sku;
     }
 
     public String getId() {
-        return Id;
+        return id;
     }
 
     public void setId(String id) {
-        Id = id;
+        this.id = id;
     }
 
     public String getBarcode() {
-        return Barcode;
+        return barcode;
     }
 
     public void setBarcode(String barcode) {
-        Barcode = barcode;
+        this.barcode = barcode;
     }
 
     public Attribute getAttribute() {

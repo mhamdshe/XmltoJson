@@ -1,6 +1,8 @@
 package com.example.xmltojson;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+
 import android.os.Bundle;
 import android.widget.TextView;
 
@@ -11,12 +13,18 @@ import com.example.xmltojson.models.Manufacturer;
 import com.example.xmltojson.models.Picture;
 import com.example.xmltojson.models.Product;
 import com.example.xmltojson.models.Specification;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
+
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -29,12 +37,14 @@ public class MainActivity extends AppCompatActivity {
     TextView textView;
     Product product;
     ArrayList<Product> products;
+    FirebaseFirestore firebaseFirestore;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         textView = findViewById(R.id.textView);
+        firebaseFirestore = FirebaseFirestore.getInstance();
         product = new Product();
         products = new ArrayList<>();
         product.setCategory(new Category());
@@ -47,12 +57,51 @@ public class MainActivity extends AppCompatActivity {
 //        String s = readTextFile(inputStream);
         Document document = parseXML(new InputSource(inputStream));
         textView.setText(document.getDocumentElement().getNodeName());
+        firebaseFirestore.collection("products").get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+            @Override
+            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                System.out.println(queryDocumentSnapshots.getDocuments().size() + " products size 1");
+            }
+        });
         if (document.hasChildNodes()) {
             printNodeList(document.getChildNodes());
         }
-        System.out.println(products.size() + " product size    sasaaaaaaaaaaaaed");
-        System.out.println(products.get(0).getId() + "product id   sasaaaaaaaaaaaaed");
-        System.out.println(products.get(1).getId() + "product id   sasaaaaaaaaaaaaed sasaaaaaaaaaaaaedsasaaaaaaaaaaaaedsasaaaaaaaaaaaaedsasaaaaaaaaaaaaed");
+        for (int i = 0; i < products.size(); i++) {
+            final int finalI = i;
+            firebaseFirestore.collection("products").whereEqualTo("id", products.get(i).getId()).get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                @Override
+                public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                    if (queryDocumentSnapshots.getDocuments().size() > 0) {
+                        String id = queryDocumentSnapshots.getDocuments().get(0).getId();
+                        firebaseFirestore.collection("products").document(id).set(products.get(finalI)).addOnSuccessListener(new OnSuccessListener<Void>() {
+                            @Override
+                            public void onSuccess(Void aVoid) {
+                                System.out.println("existing product is updated successfully!!");
+                            }
+                        });
+                    } else {
+                        firebaseFirestore.collection("products").add(products.get(finalI)).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                            @Override
+                            public void onSuccess(DocumentReference documentReference) {
+                                System.out.println("new document uploaded successfully!");
+                            }
+                        }).addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                System.out.println("document upload failed!!");
+                            }
+                        });
+                    }
+                }
+            });
+
+            firebaseFirestore.collection("products").get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                @Override
+                public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                    System.out.println(queryDocumentSnapshots.getDocuments().size() + " products size 2");
+                }
+            });
+        }
 //            JSONObject jsonObject = xmlToJson.toJson();
 //            String jsonString = xmlToJson.toString();
 //            String formatted = xmlToJson.toFormattedString();
@@ -197,7 +246,7 @@ public class MainActivity extends AppCompatActivity {
                                     product.setTax(node.getNodeValue());
                                     break;
                                 case "VAT":
-                                    product.setVAT(node.getNodeValue());
+                                    product.setVat(node.getNodeValue());
                                     break;
                                 case "MainCategory":
                                     product.setMainCategory(node.getNodeValue());

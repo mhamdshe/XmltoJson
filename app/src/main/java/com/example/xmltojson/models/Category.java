@@ -1,30 +1,30 @@
 package com.example.xmltojson.models;
 
 public class Category {
-    String DisplayOrder;
-    String Path;
+    String displayOrder;
+    String path;
 
     public Category(String displayOrder, String path) {
-        DisplayOrder = displayOrder;
-        Path = path;
+        this.displayOrder = displayOrder;
+        this.path = path;
     }
 
     public Category() {
     }
 
     public String getDisplayOrder() {
-        return DisplayOrder;
+        return displayOrder;
     }
 
     public void setDisplayOrder(String displayOrder) {
-        DisplayOrder = displayOrder;
+        this.displayOrder = displayOrder;
     }
 
     public String getPath() {
-        return Path;
+        return path;
     }
 
     public void setPath(String path) {
-        Path = path;
+        this.path = path;
     }
 }

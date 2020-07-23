@@ -1,30 +1,30 @@
 package com.example.xmltojson.models;
 
 public class Attribute {
-    String Name;
-    String Value;
+    String name;
+    String value;
 
     public Attribute() {
     }
 
     public Attribute(String name, String value) {
-        Name = name;
-        Value = value;
+        this.name = name;
+        this.value = value;
     }
 
     public String getName() {
-        return Name;
+        return name;
     }
 
     public void setName(String name) {
-        Name = name;
+        this.name = name;
     }
 
     public String getValue() {
-        return Value;
+        return value;
     }
 
     public void setValue(String value) {
-        Value = value;
+        this.value = value;
     }
 }

@@ -1,20 +1,20 @@
 package com.example.xmltojson.models;
 
 public class Picture {
-    String Path;
+    String path;
 
     public Picture() {
     }
 
     public Picture(String path) {
-        Path = path;
+        this.path = path;
     }
 
     public String getPath() {
-        return Path;
+        return path;
     }
 
     public void setPath(String path) {
-        Path = path;
+        this.path = path;
     }
 }

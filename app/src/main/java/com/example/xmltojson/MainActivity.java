@@ -1,29 +1,37 @@
 package com.example.xmltojson;
 
 import androidx.appcompat.app.AppCompatActivity;
+
 import android.os.Bundle;
+import android.os.Environment;
+import android.util.Log;
 import android.widget.TextView;
+
 import com.example.xmltojson.models.Attribute;
 import com.example.xmltojson.models.Category;
 import com.example.xmltojson.models.Combination;
 import com.example.xmltojson.models.Manufacturer;
 import com.example.xmltojson.models.Picture;
 import com.example.xmltojson.models.Product;
-import com.example.xmltojson.models.Products;
 import com.example.xmltojson.models.Specification;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.google.gson.Gson;
+
 import org.w3c.dom.Document;
 import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
-import java.io.ByteArrayOutputStream;
+
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStreamWriter;
 import java.util.ArrayList;
+
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
@@ -63,12 +71,40 @@ public class MainActivity extends AppCompatActivity {
         if (document.hasChildNodes()) {
             printNodeList(document.getChildNodes());
         }
-        firebaseFirestore.collection("products 2").add(new Products(products, "general")).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-            @Override
-            public void onSuccess(DocumentReference documentReference) {
-                System.out.println("documents uploaded successfully");
-            }
-        });
+        Gson gson = new Gson();
+        String productsJson = gson.toJson(products);
+        // Get the directory for the user's public pictures directory.
+        final File path =
+                Environment.getExternalStoragePublicDirectory
+                        (
+                                //Environment.DIRECTORY_PICTURES
+                                Environment.DIRECTORY_DCIM
+                        );
+
+        // Make sure the path directory exists.
+        if (!path.exists()) {
+            // Make it, if it doesn't exit
+            path.mkdirs();
+        }
+
+        final File file = new File(path, "products.json");
+
+        // Save your stream, don't forget to flush() it before closing it.
+
+        try {
+            file.createNewFile();
+            FileOutputStream fOut = new FileOutputStream(file);
+            OutputStreamWriter myOutWriter = new OutputStreamWriter(fOut);
+            myOutWriter.append(productsJson);
+
+            myOutWriter.close();
+
+            fOut.flush();
+            fOut.close();
+        } catch (IOException e) {
+            Log.e("Exception", "File write failed: " + e.toString());
+        }
+
 //        for (int i = 0; i < products.size(); i++){
 //            final int finalI = i;
 //            firebaseFirestore.collection("products").whereEqualTo("id", products.get(i).getId()).get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {

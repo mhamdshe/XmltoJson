@@ -1,43 +1,42 @@
 package com.example.xmltojson;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
 import android.widget.TextView;
-
 import com.example.xmltojson.models.Attribute;
 import com.example.xmltojson.models.Category;
 import com.example.xmltojson.models.Combination;
 import com.example.xmltojson.models.Manufacturer;
 import com.example.xmltojson.models.Picture;
 import com.example.xmltojson.models.Product;
+import com.example.xmltojson.models.Products;
 import com.example.xmltojson.models.Specification;
-import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
-
 import org.w3c.dom.Document;
 import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
-
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
-
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
+
 
 public class MainActivity extends AppCompatActivity {
     TextView textView;
     Product product;
     ArrayList<Product> products;
     FirebaseFirestore firebaseFirestore;
+    int attributeCounter = 0;
+    Combination combination = new Combination();
+    Attribute attribute = new Attribute();
+    Specification specification = new Specification();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,8 +52,6 @@ public class MainActivity extends AppCompatActivity {
         product.setCombinations(new ArrayList<Combination>());
         product.setSpecifications(new ArrayList<Specification>());
         InputStream inputStream = getResources().openRawResource(R.raw.ekrumoda);
-//        XmlToJson xmlToJson = new XmlToJson.Builder(inputStream,null).build();
-//        String s = readTextFile(inputStream);
         Document document = parseXML(new InputSource(inputStream));
         textView.setText(document.getDocumentElement().getNodeName());
         firebaseFirestore.collection("products").get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
@@ -66,86 +63,48 @@ public class MainActivity extends AppCompatActivity {
         if (document.hasChildNodes()) {
             printNodeList(document.getChildNodes());
         }
-        for (int i = 0; i < products.size(); i++) {
-            final int finalI = i;
-            firebaseFirestore.collection("products").whereEqualTo("id", products.get(i).getId()).get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
-                @Override
-                public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-                    if (queryDocumentSnapshots.getDocuments().size() > 0) {
-                        String id = queryDocumentSnapshots.getDocuments().get(0).getId();
-                        firebaseFirestore.collection("products").document(id).set(products.get(finalI)).addOnSuccessListener(new OnSuccessListener<Void>() {
-                            @Override
-                            public void onSuccess(Void aVoid) {
-                                System.out.println("existing product is updated successfully!!");
-                            }
-                        });
-                    } else {
-                        firebaseFirestore.collection("products").add(products.get(finalI)).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-                            @Override
-                            public void onSuccess(DocumentReference documentReference) {
-                                System.out.println("new document uploaded successfully!");
-                            }
-                        }).addOnFailureListener(new OnFailureListener() {
-                            @Override
-                            public void onFailure(@NonNull Exception e) {
-                                System.out.println("document upload failed!!");
-                            }
-                        });
-                    }
-                }
-            });
-
-            firebaseFirestore.collection("products").get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
-                @Override
-                public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-                    System.out.println(queryDocumentSnapshots.getDocuments().size() + " products size 2");
-                }
-            });
-        }
-//            JSONObject jsonObject = xmlToJson.toJson();
-//            String jsonString = xmlToJson.toString();
-//            String formatted = xmlToJson.toFormattedString();
-//        ObjectMapper mapper=new ObjectMapper();
-//            List<Product> products = Arrays.asList(mapper.readValue(s  ,Product[].class));
-//            Toast.makeText(this, products.get(0).getName(), Toast.LENGTH_SHORT).show();
-
-//        textView.setText(s);
-        // Get the directory for the user's public pictures directory.
-//        final File path =
-//                Environment.getExternalStoragePublicDirectory
-//                        (
-//                                //Environment.DIRECTORY_PICTURES
-//                                Environment.DIRECTORY_DCIM
-//                        );
+        firebaseFirestore.collection("products 2").add(new Products(products, "general")).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+            @Override
+            public void onSuccess(DocumentReference documentReference) {
+                System.out.println("documents uploaded successfully");
+            }
+        });
+//        for (int i = 0; i < products.size(); i++){
+//            final int finalI = i;
+//            firebaseFirestore.collection("products").whereEqualTo("id", products.get(i).getId()).get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+//                @Override
+//                public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+//                    if (queryDocumentSnapshots.getDocuments().size() > 0) {
+//                        String id = queryDocumentSnapshots.getDocuments().get(0).getId();
+//                        firebaseFirestore.collection("products").document(id).set(products.get(finalI)).addOnSuccessListener(new OnSuccessListener<Void>() {
+//                            @Override
+//                            public void onSuccess(Void aVoid) {
+//                                System.out.println("existing product is updated successfully!!");
+//                            }
+//                        });
+//                    } else {
+//                        firebaseFirestore.collection("products").add(products.get(finalI)).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+//                            @Override
+//                            public void onSuccess(DocumentReference documentReference) {
+//                                System.out.println("new document uploaded successfully!");
+//                            }
+//                        }).addOnFailureListener(new OnFailureListener() {
+//                            @Override
+//                            public void onFailure(@NonNull Exception e) {
+//                                System.out.println("document upload failed!!");
+//                            }
+//                        });
+//                    }
+//                }
+//            });
 //
-//        // Make sure the path directory exists.
-//        if(!path.exists())
-//        {
-//            // Make it, if it doesn't exit
-//            path.mkdirs();
+//            firebaseFirestore.collection("products").get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+//                @Override
+//                public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+//                    System.out.println(queryDocumentSnapshots.getDocuments().size() + " products size 2");
+//                }
+//            });
 //        }
-//
-//        final File file = new File(path, "test2.txt");
-//
-//        // Save your stream, don't forget to flush() it before closing it.
-//
-//        try {
-//            file.createNewFile();
-//            FileOutputStream fOut = new FileOutputStream(file);
-//            OutputStreamWriter myOutWriter = new OutputStreamWriter(fOut);
-//            myOutWriter.append(s);
-//
-//            myOutWriter.close();
-//
-//            fOut.flush();
-//            fOut.close();
-//        }
-//        catch (IOException e)
-//        {
-//            Log.e("Exception", "File write failed: " + e.toString());
-//        }
-
-
     }
 
     public Document parseXML(InputSource source) {
@@ -160,29 +119,6 @@ public class MainActivity extends AppCompatActivity {
             return null;
         }
     }
-
-    private String readTextFile(InputStream inputStream) {
-        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-
-        byte[] buf = new byte[1024];
-        int len;
-        try {
-            while ((len = inputStream.read(buf)) != -1) {
-                outputStream.write(buf, 0, len);
-            }
-            outputStream.close();
-            inputStream.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return outputStream.toString();
-    }
-
-
-    int attributeCounter = 0;
-    Combination combination = new Combination();
-    Attribute attribute = new Attribute();
-    Specification specification = new Specification();
 
     private void printNodeList(NodeList nodeList) {
 

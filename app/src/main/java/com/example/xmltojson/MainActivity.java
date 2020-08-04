@@ -14,11 +14,10 @@ import com.example.xmltojson.models.Manufacturer;
 import com.example.xmltojson.models.Picture;
 import com.example.xmltojson.models.Product;
 import com.example.xmltojson.models.Specification;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.QuerySnapshot;
 import com.google.gson.Gson;
 
+import org.w3c.dom.CharacterData;
 import org.w3c.dom.Document;
 import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
@@ -35,6 +34,8 @@ import java.util.ArrayList;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
+import org.w3c.dom.Element;
+
 
 public class MainActivity extends AppCompatActivity {
     TextView textView;
@@ -43,8 +44,12 @@ public class MainActivity extends AppCompatActivity {
     FirebaseFirestore firebaseFirestore;
     int attributeCounter = 0;
     Combination combination = new Combination();
+    Category category = new Category();
     Attribute attribute = new Attribute();
     Specification specification = new Specification();
+    private String namedNodeMap;
+    NodeList nodes;
+    int k=0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,20 +59,30 @@ public class MainActivity extends AppCompatActivity {
         firebaseFirestore = FirebaseFirestore.getInstance();
         product = new Product();
         products = new ArrayList<>();
-        product.setCategory(new Category());
+        product.setCategories(new ArrayList<Category>());
         product.setManufacturer(new Manufacturer());
         product.setPictures(new ArrayList<Picture>());
         product.setCombinations(new ArrayList<Combination>());
         product.setSpecifications(new ArrayList<Specification>());
         InputStream inputStream = getResources().openRawResource(R.raw.ekrumoda);
         Document document = parseXML(new InputSource(inputStream));
-        textView.setText(document.getDocumentElement().getNodeName());
-        firebaseFirestore.collection("products").get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
-            @Override
-            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-                System.out.println(queryDocumentSnapshots.getDocuments().size() + " products size 1");
-            }
-        });
+
+        nodes = document.getElementsByTagName("Description");
+            //Element element = (Element) nodes.item(0);
+
+            //NodeList title = element.getElementsByTagName("CDATA");
+            //Element line = (Element) title.item(0);
+           //System.out.println("Title: " + getCharacterDataFromElement(line));
+            // System.out.println("Title: " + getCharacterDataFromElement(element));
+
+
+//        textView.setText(document.getDocumentElement().getNodeName());
+//        firebaseFirestore.collection("products").get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+//            @Override
+//            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+//                System.out.println(queryDocumentSnapshots.getDocuments().size() + " products size 1");
+//            }
+//        });
         if (document.hasChildNodes()) {
             printNodeList(document.getChildNodes());
         }
@@ -159,6 +174,7 @@ public class MainActivity extends AppCompatActivity {
     private void printNodeList(NodeList nodeList) {
 
         for (int count = 0; count < nodeList.getLength(); count++) {
+
             Node elemNode = nodeList.item(count);
             if (elemNode.getNodeType() == Node.ELEMENT_NODE)
             {
@@ -172,8 +188,6 @@ public class MainActivity extends AppCompatActivity {
                     {
                         Node node = nodeMap.item(i);
                         if (elemNode.getNodeName().equals("Product")) {
-                            if (product.getCategory().getPath() != null) {
-                            }
                             switch (node.getNodeName()) {
                                 case "Id":
                                     product.setId(node.getNodeValue());
@@ -230,10 +244,12 @@ public class MainActivity extends AppCompatActivity {
                         } else if (elemNode.getNodeName().equals("Category")) {
                             switch (node.getNodeName()) {
                                 case "Path":
-                                    product.getCategory().setPath(node.getNodeValue());
+                                    category.setPath(node.getNodeValue());
                                     break;
                                 case "DisplayOrder":
-                                    product.getCategory().setDisplayOrder(node.getNodeValue());
+                                    category.setDisplayOrder(node.getNodeValue());
+                                    product.getCategories().add(category);
+                                    category=new Category();
                                     break;
                                 default:
                                     break;
@@ -304,6 +320,7 @@ public class MainActivity extends AppCompatActivity {
                                     break;
                             }
                         }
+
                     }
                 }
                 if (elemNode.hasChildNodes()) {
@@ -311,10 +328,12 @@ public class MainActivity extends AppCompatActivity {
                     printNodeList(elemNode.getChildNodes());
                 }
                 if (elemNode.getNodeName().equals("Product")) {
+                    product.setDescription(nodes.item(k).getTextContent());
                     products.add(product);
+                    k++;
                     attributeCounter = 0;
                     product = new Product();
-                    product.setCategory(new Category());
+                    product.setCategories(new ArrayList<Category>());
                     product.setManufacturer(new Manufacturer());
                     product.setPictures(new ArrayList<Picture>());
                     product.setCombinations(new ArrayList<Combination>());
@@ -322,5 +341,13 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         }
+    }
+    public static String getCharacterDataFromElement(Element e) {
+        Node child = e.getFirstChild();
+        //if (child instanceof CharacterData) {
+            CharacterData cd = (CharacterData) child;
+            return cd.getData();
+        //}
+        //return "";
     }
 }

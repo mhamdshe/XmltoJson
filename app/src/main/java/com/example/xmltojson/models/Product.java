@@ -19,7 +19,7 @@ public class Product {
     public String sku;
     public String modelCode;
     public String id;
-    public Category category;
+    ArrayList<Category> categories;
     Manufacturer manufacturer;
     public String editorNote;
     public String description;
@@ -30,7 +30,7 @@ public class Product {
     public Product() {
     }
 
-    public Product(String content, String mainCategory, String vat, String tax, String weight, String price, String oldPrice, String stockQuantity, String currency, String fullDescription, String shortDescription, String name, String gtin, String color, String sku, String modelCode, String id, Category categories, Manufacturer manufacturers, ArrayList<Picture> pictures, ArrayList<Combination> combinations, ArrayList<Specification> specifications, String editorNote, String description) {
+    public Product(String content, String mainCategory, String vat, String tax, String weight, String price, String oldPrice, String stockQuantity, String currency, String fullDescription, String shortDescription, String name, String gtin, String color, String sku, String modelCode, String id, ArrayList<Category> categories, Manufacturer manufacturers, ArrayList<Picture> pictures, ArrayList<Combination> combinations, ArrayList<Specification> specifications, String editorNote, String description) {
         this.mainCategory = mainCategory;
         this.vat = vat;
         this.tax = tax;
@@ -47,7 +47,7 @@ public class Product {
         this.sku = sku;
         this.modelCode = modelCode;
         this.id = id;
-        category = categories;
+        this.categories = categories;
         manufacturer = manufacturers;
         this.pictures = pictures;
         this.combinations = combinations;
@@ -185,12 +185,12 @@ public class Product {
         this.id = id;
     }
 
-    public Category getCategory() {
-        return category;
+    public ArrayList<Category> getCategories() {
+        return categories;
     }
 
-    public void setCategory(Category category) {
-        this.category = category;
+    public void setCategories(ArrayList<Category> categories) {
+        this.categories = categories;
     }
 
     public Manufacturer getManufacturer() {

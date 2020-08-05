@@ -1,5 +1,6 @@
 package com.example.xmltojson;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
@@ -14,7 +15,11 @@ import com.example.xmltojson.models.Manufacturer;
 import com.example.xmltojson.models.Picture;
 import com.example.xmltojson.models.Product;
 import com.example.xmltojson.models.Specification;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QuerySnapshot;
 import com.google.gson.Gson;
 
 import org.w3c.dom.CharacterData;
@@ -50,12 +55,14 @@ public class MainActivity extends AppCompatActivity {
     private String namedNodeMap;
     NodeList nodes;
     int k=0;
+    ArrayList<String> mainCategories;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         textView = findViewById(R.id.textView);
+        mainCategories = new ArrayList<>();
         firebaseFirestore = FirebaseFirestore.getInstance();
         product = new Product();
         products = new ArrayList<>();
@@ -64,7 +71,7 @@ public class MainActivity extends AppCompatActivity {
         product.setPictures(new ArrayList<Picture>());
         product.setCombinations(new ArrayList<Combination>());
         product.setSpecifications(new ArrayList<Specification>());
-        InputStream inputStream = getResources().openRawResource(R.raw.ekrumoda);
+        InputStream inputStream = getResources().openRawResource(R.raw.ekrumoda_2);
         Document document = parseXML(new InputSource(inputStream));
 
         nodes = document.getElementsByTagName("Description");
@@ -120,8 +127,19 @@ public class MainActivity extends AppCompatActivity {
             Log.e("Exception", "File write failed: " + e.toString());
         }
 
-//        for (int i = 0; i < products.size(); i++){
-//            final int finalI = i;
+        for (int i = 0; i < products.size(); i++){
+            final int finalI = i;
+            firebaseFirestore.collection("products").add(products.get(i)).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                @Override
+                public void onSuccess(DocumentReference documentReference) {
+                    System.out.println("document " + finalI +" uploaded successfully!");
+                }
+            }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    System.out.println("document "+ finalI + " upload failed!!");
+                }
+            });
 //            firebaseFirestore.collection("products").whereEqualTo("id", products.get(i).getId()).get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
 //                @Override
 //                public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
@@ -133,7 +151,8 @@ public class MainActivity extends AppCompatActivity {
 //                                System.out.println("existing product is updated successfully!!");
 //                            }
 //                        });
-//                    } else {
+//                    }
+//                    else {
 //                        firebaseFirestore.collection("products").add(products.get(finalI)).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
 //                            @Override
 //                            public void onSuccess(DocumentReference documentReference) {
@@ -148,14 +167,14 @@ public class MainActivity extends AppCompatActivity {
 //                    }
 //                }
 //            });
-//
+
 //            firebaseFirestore.collection("products").get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
 //                @Override
 //                public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
 //                    System.out.println(queryDocumentSnapshots.getDocuments().size() + " products size 2");
 //                }
 //            });
-//        }
+        }
     }
 
     public Document parseXML(InputSource source) {
@@ -235,7 +254,82 @@ public class MainActivity extends AppCompatActivity {
                                     product.setVat(node.getNodeValue());
                                     break;
                                 case "MainCategory":
-                                    product.setMainCategory(node.getNodeValue());
+//                                    String result = fetchMainCategory(node.getNodeValue());
+//                                    if (result != null)
+//                                        mainCategories.add(result);
+                                    switch (node.getNodeValue()) {
+                                        case "":
+                                        case "Alt Giyim":
+                                        case "Takım":
+                                        case "Etek":
+                                        case "Tulum":
+                                        case "Takımlar":
+                                        case "Üst Giyim":
+                                        case "Büyük Beden":
+                                        case "Giyim":
+                                        case "Pantolon":
+                                        case "Sweatshirt":
+                                        case "Gömlek":
+                                        case "Denim":
+                                        case "Hırka":
+                                        case "Hamile Giyim":
+                                        case "Polyester":
+                                        case "Tesettür Mayo":
+                                        case "Eşofman Takım":
+                                        case "Penye":
+                                        case "Abiye":
+                                        case "Pamuk Polyester":
+                                        case "Tayt":
+                                        case "Triko":
+                                        case "Doğal ve Rahat":
+                                        case "Bluz":
+                                        case "Yelek":
+                                        case "Eşofman":
+                                        case "Mayo":
+                                        case "Şalvar Pantolon":
+                                            product.setMainCategory("Clothes");
+                                            break;
+                                        case "Tunik":
+                                        case "Dış Giyim":
+                                        case "Elbise":
+                                        case "Ferace":
+                                        case "Pardesü":
+                                        case "Şal":
+                                        case "Trenchoat":
+                                        case "Kap - Trenchoat - Kaban":
+                                        case "Kaban - Mont":
+                                        case "Trençkot - Kap":
+                                        case "Panço":
+                                        case "Ceket":
+                                            product.setMainCategory("Outside Clothes");
+                                            break;
+                                        case "Boyunluk - Kolluk - Eldiven":
+                                        case "Gözlük":
+                                        case "Çanta":
+                                        case "Topuz Tokası":
+                                        case "Aksesuar":
+                                        case "Takı":
+                                        case "Kolye":
+                                        case "Babet":
+                                        case "Şal-Eşarp Modelleri":
+                                        case "Başörtüsü":
+                                        case "Bone":
+                                        case "Saat":
+                                        case "Mıknatıs Çıt Çıt":
+                                        case "Pratik Bone":
+                                        case "Kemer":
+                                        case "Ayakkabı":
+                                        case "Bileklik":
+                                        case "Yüzük":
+                                        case "Anahtarlık":
+                                            product.setMainCategory("Accessories");
+                                            break;
+                                        case " ":
+                                        default:
+                                            product.setMainCategory("Other");
+                                            break;
+
+                                    }
                                     break;
                                 default:
                                     break;
@@ -342,6 +436,18 @@ public class MainActivity extends AppCompatActivity {
             }
         }
     }
+
+    public String fetchMainCategory(String mainCategory) {
+        for (int i = 0; i < mainCategories.size(); i++) {
+            if (mainCategory.equals(mainCategories.get(i))) {
+                return null;
+            }
+        }
+        System.out.println(mainCategory + "   " + mainCategories.size());
+        return mainCategory;
+    }
+
+
     public static String getCharacterDataFromElement(Element e) {
         Node child = e.getFirstChild();
         //if (child instanceof CharacterData) {
